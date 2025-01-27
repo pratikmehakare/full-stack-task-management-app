@@ -11,9 +11,12 @@ const Navbar = () => {
   const auth = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    dispatch(clearToken()); // Dispatching a logout action to reset auth in Redux state
-    // Navigate to home after logging out, regardless of the current page
-    navigate("/", { replace: true }); // Using replace to avoid adding the logout page to history
+    dispatch(clearToken()); 
+    if (location.pathname === "/cart") {
+      window.location.href = "/"; 
+    } else {
+      navigate("/", { replace: true }); 
+    }
   };
 
   return (
