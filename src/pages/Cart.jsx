@@ -36,7 +36,7 @@ const Cart = () => {
               Check Out Now
             </button>
             </Link>
-            <Link to='/home'>
+            <Link to='/'>
             <button
               className="w-full bg-green-700 text-white rounded font-semibold text-sm py-2 uppercase hover:bg-gray-800 transition duration-300 ease-in"
             >

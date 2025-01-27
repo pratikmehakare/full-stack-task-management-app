@@ -1,18 +1,18 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { clearToken } from "../redux/Slices/AuthSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation(); 
   const { cart } = useSelector((state) => state);
-  const  auth  = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    // Clear auth token
-    dispatch(clearToken()); // Dispatching a logout action to reset auth in Redux state
-    navigate("/"); // Redirect to the home page
+    dispatch(clearToken()); 
+    navigate("/"); 
   };
 
   return (
@@ -28,12 +28,12 @@ const Navbar = () => {
           {auth.token ? (
             <>
               {/* Logout Button */}
-              <button
+              <NavLink
                 onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                className=" text-white px-4 py-2  transition"
               >
                 Logout
-              </button>
+              </NavLink>
 
               {/* Cart */}
               <NavLink to="/cart">
@@ -50,7 +50,23 @@ const Navbar = () => {
                 </div>
               </NavLink>
             </>
-          ) : null}
+          ) : location.pathname !== "/login" ? (
+            // If the user is not on the login page
+            <NavLink
+              to="/login"
+              className=" text-white px-4 py-2 transition"
+            >
+              Login
+            </NavLink>
+          ) : (
+            // If on the login page, show Home button
+            <NavLink
+              to="/"
+              className=" text-white px-4 py-2  transition"
+            >
+              Home
+            </NavLink>
+          )}
         </div>
       </nav>
     </div>

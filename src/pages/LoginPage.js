@@ -30,7 +30,7 @@ export function LoginPage() {
       // console.log("auth",auth.token)
 
       toast.success("Login Success");
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.error("Login failed", error);
       toast.error("Login Fail");

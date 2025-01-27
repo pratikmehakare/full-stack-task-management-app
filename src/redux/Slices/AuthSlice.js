@@ -7,10 +7,11 @@ export const AuthSlice = createSlice({
     },
     reducers: {
       setToken: (state, action) => {
-        state.token = action.payload; // Update the token state
+        state.token = action.payload;
       },
       clearToken: (state) => {
-        state.token = null; // Clear the token state
+        state.token = null; 
+        localStorage.clear();
       },
     },
   });

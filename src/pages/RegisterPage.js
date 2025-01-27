@@ -18,7 +18,7 @@ export function RegisterPage() {
         const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/register`, formData);
         console.log("Registration successful", response.data);
         toast.success("Register Success")
-        navigate("/");
+        navigate("/login");
       } catch (error) {
         console.error("Registration failed", error);
         toast.error("Registration Fail")
