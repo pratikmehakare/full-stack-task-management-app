@@ -14,7 +14,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(clearToken()); 
 
-    if (location.pathname === "/cart") {
+    if (location.pathname === "/cart" || location.pathname === "/order") {
       window.location.href = "/"; 
     } else {
       navigate("/", { replace: true }); 
