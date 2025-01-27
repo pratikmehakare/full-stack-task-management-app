@@ -6,13 +6,14 @@ import { clearToken } from "../redux/Slices/AuthSlice";
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation(); 
+  const location = useLocation(); // Get the current path
   const { cart } = useSelector((state) => state);
   const auth = useSelector((state) => state.auth);
 
   const handleLogout = () => {
-    dispatch(clearToken()); 
-    navigate("/"); 
+    dispatch(clearToken()); // Dispatching a logout action to reset auth in Redux state
+    // Navigate to home after logging out, regardless of the current page
+    navigate("/", { replace: true }); // Using replace to avoid adding the logout page to history
   };
 
   return (
@@ -28,12 +29,12 @@ const Navbar = () => {
           {auth.token ? (
             <>
               {/* Logout Button */}
-              <NavLink
+              <button
                 onClick={handleLogout}
-                className=" text-white px-4 py-2  transition"
+                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
               >
                 Logout
-              </NavLink>
+              </button>
 
               {/* Cart */}
               <NavLink to="/cart">
@@ -54,7 +55,7 @@ const Navbar = () => {
             // If the user is not on the login page
             <NavLink
               to="/login"
-              className=" text-white px-4 py-2 transition"
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
             >
               Login
             </NavLink>
@@ -62,7 +63,7 @@ const Navbar = () => {
             // If on the login page, show Home button
             <NavLink
               to="/"
-              className=" text-white px-4 py-2  transition"
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
             >
               Home
             </NavLink>

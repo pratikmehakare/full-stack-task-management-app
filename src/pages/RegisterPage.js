@@ -76,7 +76,7 @@ export function RegisterPage() {
   
           <div className="text-center mt-4">
             <a
-              href="/"
+              href="/login"
               className="text-blue-500 hover:underline"
             >
               Already have an account? Login
