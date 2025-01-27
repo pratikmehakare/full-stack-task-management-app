@@ -29,12 +29,12 @@ const Navbar = () => {
           {auth.token ? (
             <>
               {/* Logout Button */}
-              <button
+              <NavLink
                 onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                className=" text-white px-4 py-2 "
               >
                 Logout
-              </button>
+              </NavLink>
 
               {/* Cart */}
               <NavLink to="/cart">
@@ -55,7 +55,7 @@ const Navbar = () => {
             // If the user is not on the login page
             <NavLink
               to="/login"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+              className=" text-white px-4 py-2 rounded-lg"
             >
               Login
             </NavLink>
@@ -63,7 +63,7 @@ const Navbar = () => {
             // If on the login page, show Home button
             <NavLink
               to="/"
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+              className=" text-white px-4 py-2 "
             >
               Home
             </NavLink>

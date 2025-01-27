@@ -1,19 +1,33 @@
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove } from "../redux/Slices/CartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Product = ({ post }) => {
   const { cart } = useSelector((state) => state);
+  const auth = useSelector((state)=>state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const addToCart = () => {
-    dispatch(add(post));
-    toast.success("Item added to Cart");
+    if (auth.token) {
+      dispatch(add(post));
+      toast.success("Item added to Cart");
+    } else {
+      toast.error("Login first");
+      navigate("/login")
+    }
   };
+  
 
   const removeFromCart = () => {
-    dispatch(remove(post._id));
-    toast.error("Item removed from Cart");
+    if(auth.token){
+      dispatch(remove(post._id));
+      toast.error("Item removed from Cart");
+    }else{
+      toast("Login First")
+      navigate("/login")
+    }
   };
 
   return (
