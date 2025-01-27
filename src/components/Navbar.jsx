@@ -2,6 +2,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { clearToken } from "../redux/Slices/AuthSlice";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -12,11 +13,13 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(clearToken()); 
+
     if (location.pathname === "/cart") {
       window.location.href = "/"; 
     } else {
       navigate("/", { replace: true }); 
     }
+    toast.success("Logout")
   };
 
   return (
