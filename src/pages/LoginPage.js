@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setToken } from "../redux/Slices/AuthSlice"
 
 export function LoginPage() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const  auth  = useSelector((state)=> state.auth)
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -16,12 +20,20 @@ export function LoginPage() {
     e.preventDefault();
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/login`, formData);
-      console.log("Login successful", response.data);
-      toast.success("Login Success")
+      const token = response.data.token; 
+
+      // console.log("token",token)
+      // console.log("res",response)
+      localStorage.setItem("authToken", token);
+
+      dispatch(setToken(token));
+      // console.log("auth",auth.token)
+
+      toast.success("Login Success");
       navigate("/home");
     } catch (error) {
       console.error("Login failed", error);
-      toast.error("Login Fail")
+      toast.error("Login Fail");
     }
   };
 
